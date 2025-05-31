@@ -1,0 +1,1 @@
+Docker compose se tomo la configuración de https://github.com/JLalib/docker-zabbix/blob/main/docker-compose.yml crédito a el por la creacion
