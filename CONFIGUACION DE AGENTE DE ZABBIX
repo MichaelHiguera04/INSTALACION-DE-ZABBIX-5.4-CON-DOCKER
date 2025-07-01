@@ -3,12 +3,17 @@ firewall-cmd --add-port=10050/tcp --permanent
 firewall-cmd --add-port=10051/tcp --permanent
 firewall-cmd --add-port=80/tcp --permanente
 
+#apertura de puertos con IPtables 
+iptables -I INPUT -p tcp --dport 10050 -j ACCEPT # permitir el trafico entrante por el puerto
+iptables -I OUTPUT -p tcp --dport 10051 -j ACCEPT # Si el servidor Zabbix necesita enviar datos al agente (opcional)
+service iptables save # Guardar reglas tras el reinicio
+
 #apertura de puertos necesarios para zabbiz en Windows
 netsh advfirewall firewall add rule name="Zabbix Agent" dir=in action=allow protocol=TCP localport=10050
 netsh advfirewall firewall add rule name="Zabbix Server" dir=in action=allow protocol=TCP localport=10051
 netsh advfirewall firewall add rule name="Zabbix Web" dir=in action=allow protocol=TCP localport=80
 
-#Instalacion y configuracion de agente para rockie o redhat linux 5.4
+#Instalacion y configuracion de agente para rocky o redhat linux 
 
 #Importacion de el repositorio
 rpm -Uvh https://repo.zabbix.com/zabbix/7.0/rhel/9/x86_64/zabbix-release-7.0-5.el9.noarch.rpm
